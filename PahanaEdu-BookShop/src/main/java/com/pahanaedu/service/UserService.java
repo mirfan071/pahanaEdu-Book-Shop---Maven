@@ -45,4 +45,9 @@ public class UserService {
     public User getUserById(int id) throws SQLException {
         return userDAO.getUserById(id);
     }
+    
+    public User getUserByUsername(String username) throws SQLException {
+        return userDAO.getUserByUsername(username);
+    }
+
 }

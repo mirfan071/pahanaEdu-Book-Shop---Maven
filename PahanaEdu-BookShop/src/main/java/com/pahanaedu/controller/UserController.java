@@ -64,7 +64,7 @@ public class UserController extends HttpServlet {
             throws SQLException, ServletException, IOException {
         List<User> users = userService.getAllUsers();
         request.setAttribute("userList", users);
-        request.getRequestDispatcher("/WEB-INF/view/listUsers.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/viewUsers.jsp").forward(request, response);
     }
 
     private void showAddForm(HttpServletRequest request, HttpServletResponse response)
