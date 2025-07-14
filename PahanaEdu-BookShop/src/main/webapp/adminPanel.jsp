@@ -43,8 +43,8 @@
 
 
 <div class="button-container">
-  			<a href="registerUser.jsp" class="dashboard-btn add-user">Add User</a>
-		    <a href="allUsers" class="dashboard-btn view-user">View All Users</a>
+  			<a href="addUser.jsp" class="dashboard-btn add-user">Add User</a>
+		    <a href="viewUsers" class="dashboard-btn view-user">View All Users</a>
 		    <a href="addCustomer.jsp" class="dashboard-btn add-customer">Add Customer</a>
 		    <a href="allCustomers" class="dashboard-btn view-customer">View All Customers</a>
 		    <a href="addBook.jsp" class="dashboard-btn add-book">Add Book</a>

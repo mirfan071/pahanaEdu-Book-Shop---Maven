@@ -69,7 +69,7 @@ public class UserController extends HttpServlet {
 
     private void showAddForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/view/addUser.jsp").forward(request, response);
+        request.getRequestDispatcher("addUser.jsp").forward(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
@@ -77,21 +77,44 @@ public class UserController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         User existingUser = userService.getUserById(id);
         request.setAttribute("user", existingUser);
-        request.getRequestDispatcher("/WEB-INF/view/editUser.jsp").forward(request, response);
+        request.getRequestDispatcher("editUser.jsp").forward(request, response);
     }
 
     private void addUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        String fullname = request.getParameter("fullname");
-        String username = request.getParameter("username");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String role = request.getParameter("role");
+    	
+    	
+    	String fullname = request.getParameter("fullname");
+    	String username = request.getParameter("username");
+    	String email = request.getParameter("email");
+    	String password = request.getParameter("password");
+    	String confirm = request.getParameter("confirm");
+    	String role = request.getParameter("role");
 
+    	if (!password.equals(confirm)) {
+    	    request.setAttribute("error", "Passwords do not match.");
+    	    
+    	   //to retain the input values as same without disappearing 
+    	    request.setAttribute("fullname", fullname);
+    	    request.setAttribute("username", username);
+    	    request.setAttribute("email", email);
+    	    request.setAttribute("role", role);
+    	    request.getRequestDispatcher("addUser.jsp").forward(request, response);
+    	  
+    	    return;
+    	}
         if (userService.isUsernameOrEmailExists(username, email)) {
-            request.setAttribute("errorMessage", "Username or Email already exists.");
-            request.getRequestDispatcher("/WEB-INF/view/addUser.jsp").forward(request, response);
+            request.setAttribute("error", "Username or Email already exists.");
+            
+          //to retain the input values as same without disappearing if there is username or PW exists
+            request.setAttribute("fullname", fullname);
+            request.setAttribute("username", username);
+            request.setAttribute("email", email);
+            request.setAttribute("role", role);
+            request.getRequestDispatcher("addUser.jsp").forward(request, response);
+            
             return;
+            
         }
 
         String hashedPassword = hashPassword(password);
@@ -104,7 +127,9 @@ public class UserController extends HttpServlet {
         user.setRole(role);
 
         userService.addUser(user);
-        response.sendRedirect("user?action=list");
+        HttpSession session = request.getSession();
+        session.setAttribute("message", "User registered successfully!");
+        response.sendRedirect("user?action=add");
     }
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response)

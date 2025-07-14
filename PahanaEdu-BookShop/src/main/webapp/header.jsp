@@ -32,7 +32,7 @@
             ? "Click to view Admin Panel" 
             : "Click to view Dashboard" %>">
   
-      <img src="images/logo.png" alt="Logo" class="logo">
+      <img src="Images/logo.png" alt="Logo" class="logo">
       <span>Pahana Edu Book Shop</span>
     </a>
 
