@@ -8,16 +8,16 @@ body {
 }
 
 .container {
-  width: 80%;
-  min-width: 200px;
-  max-width: 400px;
-  margin: 80px auto;
-  padding: 30px;
+  width: auto;
+  max-width: 95%;
+  margin: 40px auto;
+  padding: 20px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
-   align-items: center; 
+  overflow-x: auto; /* ensures horizontal scroll if needed */
 }
+
 
 .container-login {
   width: 50%;
@@ -63,6 +63,18 @@ body {
 .container form {
   display: flex;
   flex-direction: column;
+  align-items: center; 
+} 
+
+.container-form {
+
+  width: 90%;
+  max-width: 500px;
+  margin: 80px auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
   align-items: center; 
 }
 
@@ -131,12 +143,15 @@ label {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"],
+select {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 button {
@@ -181,14 +196,25 @@ button:hover {
   margin-top: 15px;
 }
 /*---------------------------for table----------------*/
+.container-table {
+  width: auto;
+  max-width: 95%;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  overflow-x: auto;
+}
+
 table {
-  width: 100%;
-  max-width: none;
-  min-width:500px;
+  width: max-content; /* table width expands to fit content */
+  min-width: 100%;
   margin: 20px auto;
   border-collapse: collapse;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
 
   thead {
     background-color: #353935;
@@ -220,6 +246,11 @@ table {
   th, td {
     border: 1px solid #ccc;
   }
+}
+
+.table-responsive {
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 .btn-edit {

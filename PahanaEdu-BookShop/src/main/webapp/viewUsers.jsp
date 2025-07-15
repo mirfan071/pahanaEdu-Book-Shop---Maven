@@ -33,6 +33,7 @@
 
 <div class="container">
     <h2>Users List of Book Shop</h2>
+    <div class="table-responsive">
     <table>
         <thead>
             <tr>
@@ -74,6 +75,7 @@
         <% } %>
         </tbody>
     </table>
+    </div>
 
     <div style="text-align: center; margin-top: 20px;">
         <a href="adminPanel.jsp"><button class="blue-button">Back to Admin Panel</button></a>

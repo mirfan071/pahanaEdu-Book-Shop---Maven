@@ -59,7 +59,7 @@ public class LoginController extends HttpServlet {
                 response.sendRedirect("mainInterface.jsp");
             } else {
                 request.setAttribute("errorMessage", "Invalid username or password.");
-                request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
             }
 
         } catch (SQLException e) {

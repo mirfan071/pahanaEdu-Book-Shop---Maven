@@ -18,7 +18,7 @@
  
 </head>
 <body>
-  <div class="container">
+  <div class="container-form">
     <h2>Staff User Registration</h2>
     	
     			<%
