@@ -10,6 +10,12 @@
 <body>
   <div class="container-login">
     <h2>Book Shop Staff Login</h2>
+    
+    <% String error = (String) request.getAttribute("errorMessage");
+	if (error != null) { %>
+
+	<div class="error-message"><%= error %></div>  <% } %>
+
     <form action="login" method="post">
       <div class="form-group">
         <label for="username">Username</label>
@@ -22,11 +28,7 @@
       <button type="submit" class="wide-button">Log In</button>
     </form>
 
-    <% if (request.getAttribute("error") != null) { %>
-      <div class="error">
-        <%= request.getAttribute("error") %>
-      </div>
-    <% } %>
+ 
   </div>
   <div>
   <%@ include file="footer.jsp" %>

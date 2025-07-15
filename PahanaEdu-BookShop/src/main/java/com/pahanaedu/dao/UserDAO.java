@@ -47,7 +47,7 @@ public class UserDAO {
     }
 
     public void deleteUser(int id) throws SQLException {
-        String sql = "DELETE FROM user WHERE id=?";
+        String sql = "DELETE FROM users WHERE id=?";
         try (Connection conn = DBConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);

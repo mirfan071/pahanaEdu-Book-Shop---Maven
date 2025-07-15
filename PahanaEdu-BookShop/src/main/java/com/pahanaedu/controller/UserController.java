@@ -176,7 +176,7 @@ public class UserController extends HttpServlet {
             throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         userService.deleteUser(id);
-        response.sendRedirect("user?action=list");
+        response.sendRedirect("user?action=list&deleted=true");
     }
 
     private String hashPassword(String password) {
