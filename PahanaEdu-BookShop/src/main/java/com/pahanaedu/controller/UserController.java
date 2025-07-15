@@ -37,6 +37,7 @@ public class UserController extends HttpServlet {
                 deleteUser(request, response);
             }
         } catch (SQLException e) {
+        	
             e.printStackTrace();
             request.setAttribute("errorMessage", e.getMessage());
             request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
@@ -45,15 +46,22 @@ public class UserController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
         String action = request.getParameter("action");
 
         try {
+        	
             if (action.equals("add")) {
+            	
                 addUser(request, response);
+                
             } else if (action.equals("update")) {
+            	
                 updateUser(request, response);
+                
             }
         } catch (SQLException e) {
+        	
             e.printStackTrace();
             request.setAttribute("errorMessage", e.getMessage());
             request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
@@ -61,7 +69,8 @@ public class UserController extends HttpServlet {
     }
 
     private void listUsers(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServletException, IOException {
+
+    		throws SQLException, ServletException, IOException {
         List<User> users = userService.getAllUsers();
         request.setAttribute("userList", users);
         request.getRequestDispatcher("viewUsers.jsp").forward(request, response);
