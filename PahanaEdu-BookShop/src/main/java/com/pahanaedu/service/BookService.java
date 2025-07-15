@@ -28,7 +28,11 @@ public class BookService {
 	public List<Book> getAllBooks() throws SQLException {
 	    return bookDAO.getAllBooks();
 	}
-
+	
+	public List<Book> searchBooks(String keyword) {
+		return bookDAO.searchBooks(keyword);
+		}
+	
 	public Book getBookById(int id) throws SQLException {
 	    return bookDAO.getBookById(id);
 	}

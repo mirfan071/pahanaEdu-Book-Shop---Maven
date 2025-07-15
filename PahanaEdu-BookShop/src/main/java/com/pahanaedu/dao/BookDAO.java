@@ -91,4 +91,37 @@ public class BookDAO {
 	    }
 	}
 
+	
+	public List<Book> searchBooks(String keyword) {
+	    List<Book> books = new ArrayList<>();
+	    String sql = "SELECT * FROM books WHERE LOWER(title) LIKE ? OR LOWER(author) LIKE ? OR LOWER(category) LIKE ? OR LOWER(language) LIKE ?";
+
+	    try (Connection conn = DBConnectionFactory.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        String like = "%" + keyword.toLowerCase() + "%";
+	        ps.setString(1, like);
+	        ps.setString(2, like);
+	        ps.setString(3, like);
+	        ps.setString(4, like);
+
+	        ResultSet rs = ps.executeQuery();
+	        while (rs.next()) {
+	            Book b = new Book();
+	            b.setId(rs.getInt("id"));
+	            b.setTitle(rs.getString("title"));
+	            b.setCategory(rs.getString("category"));
+	            b.setAuthor(rs.getString("author"));
+	            b.setLanguage(rs.getString("language"));
+	            b.setPrice(rs.getDouble("price"));
+	            books.add(b);
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return books;
+	}
+
 }

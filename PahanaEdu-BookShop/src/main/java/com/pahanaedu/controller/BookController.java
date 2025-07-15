@@ -57,6 +57,9 @@ public class BookController extends HttpServlet {
 	        request.setAttribute("errorMessage", e.getMessage());
 	        request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
 	    }
+	    
+	    
+
 	}
 
 	
@@ -69,14 +72,15 @@ public class BookController extends HttpServlet {
 	            
 	        	Book book = extractBook(request);
 	            bookService.addBook(book);
-	            response.sendRedirect("book?action=list");
+//	            response.sendRedirect("BookController?action=list");
+	            response.sendRedirect("addBook.jsp");
 	        
 	        } else if (action.equals("update")) {
 	        
 	        	Book book = extractBook(request);
 	            book.setId(Integer.parseInt(request.getParameter("id")));
 	            bookService.updateBook(book);
-	            response.sendRedirect("book?action=list");
+	            response.sendRedirect("BookController?action=list");
 	        
 	        }
 	    } catch (SQLException e) {
