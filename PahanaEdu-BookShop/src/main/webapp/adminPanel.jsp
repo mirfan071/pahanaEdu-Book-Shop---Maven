@@ -25,7 +25,7 @@
 <div class="navbar-container">
   <div class="navbar">
     <a class="navbar-brand" href="#">
-      <img src="images/logo.png" alt="Logo" style="height: 30px; margin-right: 10px;">
+      <img src="Images/logo.png" alt="Logo" style="height: 30px; margin-right: 10px;">
       "Pahana Edu" - Book Shop
     </a>
     <div class="navbar-right">
@@ -44,7 +44,7 @@
 
 <div class="button-container">
   			<a href="addUser.jsp" class="dashboard-btn add-user">Add User</a>
-		    <a href="viewUsers" class="dashboard-btn view-user">View All Users</a>
+		   <a href="user?action=list" class="dashboard-btn view-user">View All Users</a>
 		    <a href="addCustomer.jsp" class="dashboard-btn add-customer">Add Customer</a>
 		    <a href="allCustomers" class="dashboard-btn view-customer">View All Customers</a>
 		    <a href="addBook.jsp" class="dashboard-btn add-book">Add Book</a>

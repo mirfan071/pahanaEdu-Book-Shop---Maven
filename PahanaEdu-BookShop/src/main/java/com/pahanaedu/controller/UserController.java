@@ -64,7 +64,7 @@ public class UserController extends HttpServlet {
             throws SQLException, ServletException, IOException {
         List<User> users = userService.getAllUsers();
         request.setAttribute("userList", users);
-        request.getRequestDispatcher("/WEB-INF/view/viewUsers.jsp").forward(request, response);
+        request.getRequestDispatcher("viewUsers.jsp").forward(request, response);
     }
 
     private void showAddForm(HttpServletRequest request, HttpServletResponse response)
@@ -133,7 +133,8 @@ public class UserController extends HttpServlet {
     }
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException {
+        throws SQLException, IOException {
+    	
         int id = Integer.parseInt(request.getParameter("id"));
         String fullname = request.getParameter("fullname");
         String username = request.getParameter("username");
@@ -141,11 +142,34 @@ public class UserController extends HttpServlet {
         String password = request.getParameter("password");
         String role = request.getParameter("role");
 
-        String hashedPassword = hashPassword(password);
+        User existingUser = userService.getUserById(id);
+        
+        if (existingUser == null) {
+            request.setAttribute("errorMessage", "User not found.");
+            try {
+                request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+    
 
-        User user = new User(id, fullname, username, email, hashedPassword, role);
-        userService.updateUser(user);
+        String finalPassword;
+        if (password == null || password.trim().isEmpty()) {
+            finalPassword = existingUser.getPassword(); // retain old password
+        } else {
+            finalPassword = hashPassword(password); // new password
+        }
+
+        User updatedUser = new User(id, fullname, username, email, finalPassword, role);
+        userService.updateUser(updatedUser);
+
+        HttpSession session = request.getSession();
+        session.setAttribute("message", "User updated successfully!");
         response.sendRedirect("user?action=list");
+
+        
     }
 
     private void deleteUser(HttpServletRequest request, HttpServletResponse response)
