@@ -8,6 +8,8 @@ public class BookDAO {
 	
 	public void addBook(Book book) throws SQLException {
 		
+		
+		
 		String sql = "INSERT INTO books (title, category, author, language, price) VALUES (?, ?, ?, ?, ?)";
 		try (Connection conn = DBConnectionFactory.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -108,7 +110,7 @@ public class BookDAO {
 	        ResultSet rs = ps.executeQuery();
 	        while (rs.next()) {
 	            Book b = new Book();
-	            b.setId(rs.getInt("id"));
+	            b.setId(rs.getInt("id"));	
 	            b.setTitle(rs.getString("title"));
 	            b.setCategory(rs.getString("category"));
 	            b.setAuthor(rs.getString("author"));
@@ -124,4 +126,22 @@ public class BookDAO {
 	    return books;
 	}
 
+	   public boolean isBookNameOrLanguageExists(String bookname, String language) throws SQLException {
+	        
+		   String sql = "SELECT COUNT(*) FROM books WHERE LOWER(TRIM(title)) = ? AND LOWER(TRIM(language)) = ?";
+	        
+	        try (Connection conn = DBConnectionFactory.getConnection();
+	             PreparedStatement stmt = conn.prepareStatement(sql)) {
+	            stmt.setString(1, bookname);
+	            stmt.setString(2, language);
+	            ResultSet rs = stmt.executeQuery();
+	            
+	      
+	            if (rs.next()) {
+	                return rs.getInt(1) > 0;
+	            }
+	        }
+	        return false;
+	    }
+	
 }

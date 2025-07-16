@@ -45,5 +45,9 @@ public class BookService {
 	    bookDAO.deleteBook(id);
 	}
 
+	public boolean isDuplicateBook(String title, String language) throws SQLException {
+	    return bookDAO.isBookNameOrLanguageExists(title, language);
+	}
+
 
 }

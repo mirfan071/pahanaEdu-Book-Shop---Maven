@@ -57,6 +57,8 @@ select {
   font-size: 14px;
   box-sizing: border-box;
 }
+
+
 .yellow-button {
   background-color: #ffc107; 
   color: #212529;
@@ -71,6 +73,22 @@ select {
 
 .yellow-button:hover {
   background-color: #e0a800; 
+}
+
+.blue-button {
+  background-color: #355de5; 
+  color: #212529;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-size: 15px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  
+&:hover {
+  background-color: #0137ec; 
+	}
 }
 
 button[type="submit"] {

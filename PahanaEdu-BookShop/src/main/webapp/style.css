@@ -9,7 +9,7 @@ body {
 
 .container {
   width: auto;
-  max-width: 95%;
+  max-width: 70%;
   margin: 40px auto;
   padding: 20px;
   background-color: white;
@@ -198,7 +198,7 @@ button:hover {
 /*---------------------------for table----------------*/
 .container-table {
   width: auto;
-  max-width: 95%;
+  max-width:100%;
   margin: 40px auto;
   padding: 20px;
   background-color: white;
@@ -208,8 +208,8 @@ button:hover {
 }
 
 table {
-  width: max-content; /* table width expands to fit content */
-  min-width: 100%;
+  width: auto; 
+  min-width: 50%;
   margin: 20px auto;
   border-collapse: collapse;
   background-color: #fff;

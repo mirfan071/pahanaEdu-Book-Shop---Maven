@@ -57,7 +57,7 @@
     }
 %>
 
-    <table>
+    <table class="container-table;">
         <thead>
             <tr>
                 <th>#</th>
@@ -91,9 +91,9 @@
             <% if (!"Cashier".equalsIgnoreCase(role)) { %>
             <td>
                 <div class="action-buttons">
-                    <a href="editBook?id=<%= b.getId() %>" class="btn-edit">Edit</a>
+                    <a href="BookController?action=edit&id=<%= b.getId() %>" class="btn-edit">Edit</a>
                     <% if (!"Manager".equalsIgnoreCase(role)) { %>
-                    <a href="deleteBook?id=<%= b.getId() %>" class="btn-delete"
+                    <a href="BookController?action=delete&id=<%= b.getId() %>" class="btn-delete"
                        onclick="return confirm('Are you sure you want to delete this book?');">Delete</a>
                     <% } %>
                 </div>

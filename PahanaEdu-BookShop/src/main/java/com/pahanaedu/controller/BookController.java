@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.pahanaedu.model.Book;
 
@@ -65,24 +66,63 @@ public class BookController extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String action = request.getParameter("action");
-	    try {
-	        
-	    	if (action.equals("add")) {
-	            
-	        	Book book = extractBook(request);
-	            bookService.addBook(book);
+//		String action = request.getParameter("action");
+//	    try {
+//	        
+//	    	if (action.equals("add")) {
+//	            
+//	        	Book book = extractBook(request);
+//	            bookService.addBook(book);
+////	            response.sendRedirect("BookController?action=list");
+//	            response.sendRedirect("addBook.jsp");
+//	        
+//	        } else if (action.equals("update")) {
+//	        
+//	        	Book book = extractBook(request);
+//	            book.setId(Integer.parseInt(request.getParameter("id")));
+//	            bookService.updateBook(book);
 //	            response.sendRedirect("BookController?action=list");
+//	        
+//	        }
+//	    } catch (SQLException e) {
+//	        request.setAttribute("errorMessage", e.getMessage());
+//	        request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
+//	    }
+		
+		
+		String action = request.getParameter("action");
+		
+	    try {
+	    	
+	        if ("add".equals(action)) {
+	            Book book = extractBook(request);
+
+	            // Check for duplicate book with name and language before adding to DB
+	          
+	            
+	            if (bookService.isDuplicateBook(book.getTitle(), book.getLanguage())) {
+	                request.setAttribute("error", "Book with same title in same language already exists.");
+	                
+	                // Retain previously entered values
+	                request.setAttribute("book", book);
+	                
+	                request.getRequestDispatcher("addBook.jsp").forward(request, response);
+	                return;
+	            }
+
+	            bookService.addBook(book);
+	            HttpSession session = request.getSession();
+	            session.setAttribute("message", "Book added successfully!");
 	            response.sendRedirect("addBook.jsp");
-	        
-	        } else if (action.equals("update")) {
-	        
-	        	Book book = extractBook(request);
+	            
+	        } 
+	        else if ("update".equals(action)) {
+	            Book book = extractBook(request);
 	            book.setId(Integer.parseInt(request.getParameter("id")));
 	            bookService.updateBook(book);
-	            response.sendRedirect("BookController?action=list");
-	        
+	            response.sendRedirect("BookController?action=list&updated=true");
 	        }
+	        
 	    } catch (SQLException e) {
 	        request.setAttribute("errorMessage", e.getMessage());
 	        request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
@@ -113,18 +153,26 @@ public class BookController extends HttpServlet {
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
+    	
 	        int id = Integer.parseInt(request.getParameter("id"));
+	        Book book = bookService.getBookById(id);
 	        
-		       Book book = bookService.getBookById(id);
 		       request.setAttribute("book", book);
 		       request.getRequestDispatcher("editBook.jsp").forward(request, response);
 	    }
     
     private void deleteBook(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException {
+            throws SQLException, IOException, ServletException {
     	
 		       int id = Integer.parseInt(request.getParameter("id"));
-		        bookService.deleteBook(id);
-		        response.sendRedirect("book?action=list");
+		       
+		       try {
+		           bookService.deleteBook(id);  
+		           response.sendRedirect("BookController?action=list&deleted=true"); 
+		       } catch (SQLException e) {
+		           e.printStackTrace();
+		           request.setAttribute("errorMessage", "Unable to delete book: " + e.getMessage());
+		           request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
+		       }
     }
 }
