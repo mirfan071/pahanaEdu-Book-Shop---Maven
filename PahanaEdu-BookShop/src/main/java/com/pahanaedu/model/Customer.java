@@ -21,6 +21,7 @@ public class Customer {
         this.address = address;
         this.telephone = telephone;
         this.email = email;
+       
       
     }
 

@@ -37,5 +37,16 @@ public class CustomerService {
 		public List<Customer> searchCustomer(String keyword) {
 			return customerDAO.searchCustomer(keyword);
 			}
+		
+		public Customer getCustomerById(int id) throws SQLException {
+		    return customerDAO.getCustomerById(id);
+		}
 
-}
+//		public void updateBook(Customer customer) throws SQLException {
+//		    customerDAO.updateCustomer(customer);
+//		}
+
+		public void deleteCustomer(int id) throws SQLException {
+			customerDAO.deleteCustomer(id);;
+		}
+}	

@@ -77,7 +77,7 @@ public void init() {
             
         } else if (action.equals("delete")) {
         	
-        //	deleteBook(request, response);
+        	deleteCustomer(request, response);
         	
         }
             // …edit / delete blocks here…
@@ -161,5 +161,20 @@ public void init() {
 	    customer.setEmail(request.getParameter("email"));
 	    return customer;
 	}
+	
+    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+    	
+		       int id = Integer.parseInt(request.getParameter("id"));
+		       
+		       try {
+		           customerService.deleteCustomer(id);  
+		           response.sendRedirect("CustomerController?action=list&deleted=true"); 
+		       } catch (SQLException e) {
+		           e.printStackTrace();
+		           request.setAttribute("errorMessage", "Unable to delete book: " + e.getMessage());
+		           request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
+		       }
+    }
 
 }

@@ -120,6 +120,36 @@ public class CustomerDAO {
 		    return customer;
 		}
 
+	    public Customer getCustomerById(int id) throws SQLException {
+			
+		    String sql = "SELECT * FROM customers WHERE id = ?";
+		    try (Connection conn = DBConnectionFactory.getConnection();
+		         PreparedStatement stmt = conn.prepareStatement(sql)) {
+		        stmt.setInt(1, id);
+		        ResultSet rs = stmt.executeQuery();
+		        if (rs.next()) {
+		        	
+		        	Customer c = new Customer();
+		            c.setId(rs.getInt("id"));
+		            c.setAccountNumber(rs.getString("account_number"));
+		            c.setName(rs.getString("name"));
+		            c.setAddress(rs.getString("address"));
+		            c.setTelephone(rs.getString("telephone"));
+		            c.setEmail(rs.getString("email"));
+		            return c;
+		        }
+		    }
+		    return null;
+		}
 	    
+	    public void deleteCustomer(int id) throws SQLException {
+			
+		    String sql = "DELETE FROM customers WHERE id=?";
+		    try (Connection conn = DBConnectionFactory.getConnection();
+		         PreparedStatement stmt = conn.prepareStatement(sql)) {
+		        stmt.setInt(1, id);
+		        stmt.executeUpdate();
+		    }
+		}
 	}
 	

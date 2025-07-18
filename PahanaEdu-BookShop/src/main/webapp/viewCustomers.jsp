@@ -98,11 +98,11 @@
             	
            
             <td>
-                <a href="editCustomer?id=<%= c.getAccountNumber() %>" class="btn-edit">Edit</a>
+                <a href="CustomerController?action=edit&id<%= c.getAccountNumber() %>" class="btn-edit">Edit</a>
                 
                    <% if (!"Manager".equalsIgnoreCase(role)) { %>
                    
-                <a href="deleteCustomer?id=<%= c.getId() %>" class="btn-delete"
+                <a href="CustomerController?action=delete&id=<%= c.getId() %>" class="btn-delete"
                    onclick="return confirm('Are you sure you want to delete this customer?');">Delete</a>
             </td>
             <% }} %>
