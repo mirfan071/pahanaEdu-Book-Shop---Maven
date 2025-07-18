@@ -42,9 +42,9 @@ public class CustomerService {
 		    return customerDAO.getCustomerById(id);
 		}
 
-//		public void updateBook(Customer customer) throws SQLException {
-//		    customerDAO.updateCustomer(customer);
-//		}
+		  public boolean updateCustomer(Customer customer) {
+		        return customerDAO.updateCustomer(customer);
+		    }
 
 		public void deleteCustomer(int id) throws SQLException {
 			customerDAO.deleteCustomer(id);;

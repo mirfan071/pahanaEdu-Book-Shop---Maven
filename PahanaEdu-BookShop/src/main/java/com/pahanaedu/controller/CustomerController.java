@@ -72,7 +72,7 @@ public void init() {
        
         } else if (action.equals("edit")) {
         	
-       // 	showEditForm(request, response);
+        	showEditForm(request, response);
 
             
         } else if (action.equals("delete")) {
@@ -80,7 +80,7 @@ public void init() {
         	deleteCustomer(request, response);
         	
         }
-            // …edit / delete blocks here…
+            
 
         } catch (SQLException e) {
             request.setAttribute("errorMessage", e.getMessage());
@@ -114,8 +114,10 @@ public void init() {
 
 	            request.getRequestDispatcher("addCustomer.jsp").forward(request, response);
 
-	        } else if ("update".equals(action)) {
+	        }
+	        else if ("edit".equals(action)) {
 	            int id = Integer.parseInt(request.getParameter("id"));
+
 	            Customer customer = new Customer();
 	            customer.setId(id);
 	            customer.setName(request.getParameter("name"));
@@ -123,14 +125,16 @@ public void init() {
 	            customer.setTelephone(request.getParameter("telephone"));
 	            customer.setEmail(request.getParameter("email"));
 
-//	            if (customerService.updateCustomer(customer)) {
-//	                response.sendRedirect("CustomerController?action=list");
-//	            } else {
-//	                request.setAttribute("message", "Update failed.");
-//	                request.getRequestDispatcher("editCustomer.jsp").forward(request, response);
-//	            }
+	            if (customerService.updateCustomer(customer)) {
+	                
+	                response.sendRedirect("CustomerController?action=list&updated=true");
+	            } else {
+	                request.setAttribute("message", "Update failed.");
+	                request.setAttribute("customer", customer); 
+	                request.getRequestDispatcher("editCustomer.jsp").forward(request, response);
+	            }
 	        }
-	    }
+	}
 	
 	
 	private void listCustomers(HttpServletRequest request, HttpServletResponse response)
@@ -177,4 +181,14 @@ public void init() {
 		       }
     }
 
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+    	
+	        int id = Integer.parseInt(request.getParameter("id"));
+	        Customer customer = customerService.getCustomerById(id);
+	        
+		       request.setAttribute("customer", customer);
+		       request.getRequestDispatcher("editCustomer.jsp").forward(request, response);
+	    }
 }

@@ -141,7 +141,30 @@ public class CustomerDAO {
 		    }
 		    return null;
 		}
-	    
+	    public boolean updateCustomer(Customer customer) {
+	        final String sql =
+	            "UPDATE customers " +
+	            "SET name = ?, address = ?, telephone = ?, email = ? " +
+	            "WHERE id = ?";
+
+	        try (Connection conn = DBConnectionFactory.getConnection();
+	             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+	            stmt.setString(1, customer.getName());
+	            stmt.setString(2, customer.getAddress());
+	            stmt.setString(3, customer.getTelephone());
+	            stmt.setString(4, customer.getEmail());
+	            stmt.setInt(5, customer.getId());
+
+	            int rows = stmt.executeUpdate();   
+	            return rows == 1;                  
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return false;
+	        }
+	    }
+
 	    public void deleteCustomer(int id) throws SQLException {
 			
 		    String sql = "DELETE FROM customers WHERE id=?";

@@ -2,13 +2,18 @@
 
 
 
-.custom-navbar {
-  background-color: #17a2b8;
+ .custom-navbar {
+  position: fixed;         
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;           
+  background-color: #8000ff;
   padding: 10px 0;
   font-family: Arial, sans-serif;
   font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
-
 .nav-container {
   display: flex;
   justify-content: space-between;

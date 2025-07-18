@@ -37,7 +37,7 @@
 
     <h2>Customers List</h2>
 
-    <form method="get" action="CustomerController" class="search-form">
+    <form method="get" action="CustomerController?action=update" class="search-form">
         <div class="form-group">
             <input type="text" name="query" placeholder="Search by ">
         </div>
@@ -98,7 +98,7 @@
             	
            
             <td>
-                <a href="CustomerController?action=edit&id<%= c.getAccountNumber() %>" class="btn-edit">Edit</a>
+                <a href="CustomerController?action=edit&id=<%= c.getId() %>" class="btn-edit">Edit</a>
                 
                    <% if (!"Manager".equalsIgnoreCase(role)) { %>
                    
