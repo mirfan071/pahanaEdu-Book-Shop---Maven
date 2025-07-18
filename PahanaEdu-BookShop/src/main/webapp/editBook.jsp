@@ -55,9 +55,10 @@
 		    </div>
 		</form>
 		
+		<div style="display: flex; flex-direction: column; gap: 15px;">
 				 <div>
 			      <button class="blue-button">
-			     	 <a href="BookController?action=list" style="text-decoration:none; color:black;">View All Books</a>
+			     	 <a href="BookController?action=list" style="text-decoration:none; color:white;">View All Books</a>
 			      </button>
 			     </div>
 			    
@@ -77,7 +78,7 @@
 				    } 
 				%>  		
 				
-				
+				</div>
 					 
    			 
         </div>

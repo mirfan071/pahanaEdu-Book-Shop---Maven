@@ -44,9 +44,9 @@
 
 <div class="button-container">
   			<a href="addUser.jsp" class="dashboard-btn add-user">Add User</a>
-		   <a href="user?action=list" class="dashboard-btn view-user">View All Users</a>
-		    <a href="addCustomer.jsp" class="dashboard-btn add-customer">Add Customer</a>
-		    <a href="allCustomers" class="dashboard-btn view-customer">View All Customers</a>
+		   	<a href="user?action=list" class="dashboard-btn view-user">View All Users</a>
+		    <a href="CustomerController?action=add" class="dashboard-btn add-customer">Add Customer</a>
+		    <a href="CustomerController?action=list" class="dashboard-btn view-customer">View All Customers</a>
 		    <a href="BookController?action=add" class="dashboard-btn add-book">Add Book</a>
 		    <a href="BookController?action=list" class="dashboard-btn view-book">View All Books</a>
 		    <a href="addBill" class="dashboard-btn add-bill">Add New Bill</a>

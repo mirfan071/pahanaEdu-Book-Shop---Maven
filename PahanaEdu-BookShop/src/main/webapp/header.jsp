@@ -41,7 +41,7 @@
         <span class="dropbtn">Customer Maintain</span>
         <div class="dropdown-content">
           <a href="addCustomer.jsp">Add Customer</a>
-          <a href="allCustomers">View All Customers</a>
+          <a href="CustomerController?action=list">View All Customers</a>
         </div>
       </li>
       <li class="dropdown">
