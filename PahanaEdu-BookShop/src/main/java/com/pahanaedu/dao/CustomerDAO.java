@@ -1,6 +1,7 @@
 package com.pahanaedu.dao;
 
 
+import com.pahanaedu.model.Book;
 import com.pahanaedu.model.Customer;
 import java.sql.*;
 import java.util.*;
@@ -85,6 +86,40 @@ public class CustomerDAO {
 
 	        return list;
 	    }
+	    
+	    public List<Customer> searchCustomer(String keyword) {
+		    List<Customer> customer = new ArrayList<>();
+		    String sql = "SELECT * FROM customers WHERE LOWER(account_number) LIKE ? OR LOWER(name) LIKE ? OR LOWER(address) LIKE ? OR LOWER(telephone) LIKE ? OR LOWER(email) LIKE ?";
 
+		    try (Connection conn = DBConnectionFactory.getConnection();
+		         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+		        String like = "%" + keyword.toLowerCase() + "%";
+		        ps.setString(1, like);
+		        ps.setString(2, like);
+		        ps.setString(3, like);
+		        ps.setString(4, like);
+		        ps.setString(5, like);
+
+		        ResultSet rs = ps.executeQuery();
+		        while (rs.next()) {
+		            Customer c = new Customer();
+		            c.setId(rs.getInt("id"));	
+		            c.setAccountNumber(rs.getString("account_number"));
+		            c.setName(rs.getString("name"));
+		            c.setAddress(rs.getString("address"));
+		            c.setTelephone(rs.getString("telephone"));
+		            c.setEmail(rs.getString("email"));
+		            customer.add(c);
+		        }
+
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+
+		    return customer;
+		}
+
+	    
 	}
 	

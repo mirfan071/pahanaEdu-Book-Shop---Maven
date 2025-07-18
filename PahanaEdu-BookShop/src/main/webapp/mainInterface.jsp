@@ -20,9 +20,9 @@
 
 		<div class="button-container">
 		    <a href="addCustomer.jsp" class="dashboard-btn add-customer">Add Customer</a>
-		    <a href="allCustomers" class="dashboard-btn view-customer">View All Customers</a>
+		    <a href="CustomerController?action=list" class="dashboard-btn view-customer">View All Customers</a>
 		    <a href="addBook.jsp" class="dashboard-btn add-book">Add Book</a>
-		    <a href="CustomerController?action=list" class="dashboard-btn view-book">View All Books</a>
+		    <a href="BookController?action=list" class="dashboard-btn view-book">View All Books</a>
 		    <a href="addBill" class="dashboard-btn add-bill">Add New Bill</a>
 		    <a href="viewSales" class="dashboard-btn view-sales">View All Sales</a>
 		</div>

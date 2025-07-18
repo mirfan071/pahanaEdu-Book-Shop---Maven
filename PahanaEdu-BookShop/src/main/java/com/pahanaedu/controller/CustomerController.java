@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.pahanaedu.dao.CustomerDAO;
+import com.pahanaedu.model.Book;
 import com.pahanaedu.model.Customer;
 
 import com.pahanaedu.service.CustomerService;
@@ -31,36 +32,65 @@ public void init() {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String action = request.getParameter("action");
+		//String action = request.getParameter("action");
+//	    try {
+//	        if (action == null || action.equals("list")) {
+//
+//	        	listCustomers(request, response);
+//	            
+//	       
+//	        
+//	    } catch (SQLException e) {
+//	        request.setAttribute("errorMessage", e.getMessage());
+//	        request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
+//	    }
+	    
+	    String action = request.getParameter("action");
+	    
 	    try {
-	        if (action == null || action.equals("list")) {
+            if (action == null || "list".equals(action)) {
+                // ── search OR full list ─────────────────────────────
+                String query = request.getParameter("query");
+                List<Customer> customers =
+                        (query == null || query.trim().isEmpty())
+                        ? customerService.getAllCustomers()
+                        : customerService.searchCustomer(query.trim());
 
-	        	listCustomers(request, response);
-	            
-	        } else if (action.equals("add")) {
-	        	
-	        	showAddForm(request, response);
-	          
-           
-	        } else if (action.equals("edit")) {
-	        	
-	       // 	showEditForm(request, response);
-    
-	            
-	        } else if (action.equals("delete")) {
-	        	
-	        //	deleteBook(request, response);
-	        	
-	        }
-	        
-	    } catch (SQLException e) {
-	        request.setAttribute("errorMessage", e.getMessage());
-	        request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
-	    }
-	    
-	    
+                request.setAttribute("customerList", customers);
+                request.getRequestDispatcher("viewCustomers.jsp").forward(request, response);
+                return;                        // ← VERY IMPORTANT
+            }
 
-	}
+            if ("add".equals(action)) {
+                showAddForm(request, response);
+                return;
+            }
+	     else if (action.equals("add")) {
+        	
+        	showAddForm(request, response);
+          
+       
+        } else if (action.equals("edit")) {
+        	
+       // 	showEditForm(request, response);
+
+            
+        } else if (action.equals("delete")) {
+        	
+        //	deleteBook(request, response);
+        	
+        }
+            // …edit / delete blocks here…
+
+        } catch (SQLException e) {
+            request.setAttribute("errorMessage", e.getMessage());
+            request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
+        }
+    }
+	
+
+
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

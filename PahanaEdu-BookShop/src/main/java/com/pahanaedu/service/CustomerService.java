@@ -7,6 +7,7 @@ import java.util.List;
 
 
 import com.pahanaedu.dao.CustomerDAO;
+import com.pahanaedu.model.Book;
 import com.pahanaedu.model.Customer;
 
 public class CustomerService {
@@ -33,5 +34,8 @@ public class CustomerService {
 	        return customerDAO.getAllCustomers();
 	    }
 	    
+		public List<Customer> searchCustomer(String keyword) {
+			return customerDAO.searchCustomer(keyword);
+			}
 
 }

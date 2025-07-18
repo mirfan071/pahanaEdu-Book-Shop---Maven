@@ -37,19 +37,11 @@
 
     <h2>Customers List</h2>
 
-    <form method="get" action="searchCustomer" class="search-form">
+    <form method="get" action="CustomerController" class="search-form">
         <div class="form-group">
-            <input type="text" name="accountNumber" placeholder="Search by Account Number"
-                   value="<%= request.getParameter("accountNumber") != null ? request.getParameter("accountNumber") : "" %>">
+            <input type="text" name="query" placeholder="Search by ">
         </div>
-        <div class="form-group">
-            <input type="text" name="name" placeholder="Search by Name"
-                   value="<%= request.getParameter("name") != null ? request.getParameter("name") : "" %>">
-        </div>
-        <div class="form-group">
-            <input type="text" name="telephone" placeholder="Search by Telephone"
-                   value="<%= request.getParameter("telephone") != null ? request.getParameter("telephone") : "" %>">
-        </div>
+        
         <div class="form-group">
             <button type="submit" class="yellow-button">Search</button>
         </div>
@@ -133,7 +125,7 @@
     <% } %>
 
     <div style="text-align:center; margin-top:20px;">
-        <form action="allCustomers" method="get">
+        <form action="CustomerController?action=list" method="get">
             <button type="submit" class="blue-button">View All Customers</button>
         </form>
     </div>
