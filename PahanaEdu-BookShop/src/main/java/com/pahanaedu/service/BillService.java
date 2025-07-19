@@ -38,6 +38,11 @@ public class BillService {
     public boolean deleteBill(int id) {
         return billDAO.deleteBill(id);
     }
+    
+    public List<Bill> getFilteredBills(String account, String fromDate, String toDate) {
+        return billDAO.getFilteredBills(account, fromDate, toDate);
+    }
+
 
 
    

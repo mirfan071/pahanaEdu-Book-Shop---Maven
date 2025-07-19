@@ -56,7 +56,7 @@
         <span class="dropbtn">Billing Menu</span>
         <div class="dropdown-content">
           <a href="BillController?action=add">Add New Bill</a>
-          <a href="viewSales">View Sales</a>
+          <a href="BillController?action=list">View Sales</a>
         </div>
       </li>              
      

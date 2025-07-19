@@ -17,10 +17,28 @@
 
     <% if ("admin".equalsIgnoreCase(admin)) { %>
     <div class="form-group">
-        <a href="adminPanel.jsp" class="submit-btn" style="text-decoration:none;">Back to Admin Panel</a>
+        <a href="adminPanel.jsp" class="admin-btn" style="text-decoration:none;">Back to Admin Panel</a>
     </div>
     <% } %>
 
+	<form method="get" action="BillController">
+    <input type="hidden" name="action" value="list" />
+
+    Customer Account: 
+    <input type="text" name="account" value="<%= request.getParameter("account") != null ? request.getParameter("account") : "" %>" />
+
+    From: 
+    <input type="date" name="from" value="<%= request.getParameter("from") != null ? request.getParameter("from") : "" %>" />
+
+    To: 
+    <input type="date" name="to" value="<%= request.getParameter("to") != null ? request.getParameter("to") : "" %>" />
+
+    <input type="submit" value="Filter" />
+    
+     <a href="BillController?action=list" style="margin-left: 10px; text-decoration:none;">
+        <button type="button">Clear Filters</button>
+    </a>
+</form>
     <table class="table">
         <thead>
             <tr>
@@ -46,9 +64,9 @@
                 <td><%= count++ %></td>
                 <td><%= sale.getCustomerName() %> (<%= sale.getAccountNumber() %>)</td>
                 <td><%= sale.getBooksPurchased() %></td>
-                <td><%= df.format(sale.getTotalAmount()) %></td>
+                <td style="text-align:right"><%= df.format(sale.getTotalAmount()) %></td>
                 <td><%= sale.getBillingTime() %></td>
-                <td><%= sale.getStaffUsername() %></td>
+                <td style="text-align:center"><%= sale.getStaffUsername() %></td>
 
                 <% if (!"Cashier".equalsIgnoreCase(role) && !"Manager".equalsIgnoreCase(role)) { %>
                 <td>

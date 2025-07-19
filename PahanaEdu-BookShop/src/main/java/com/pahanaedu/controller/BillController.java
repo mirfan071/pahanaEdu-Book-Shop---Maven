@@ -34,15 +34,42 @@ public class BillController extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-
+//
+//        if (action == null || "list".equals(action)) {
+//            List<Bill> bills = billService.getAllBills();
+//            request.setAttribute("billList", bills);
+//            request.getRequestDispatcher("viewBills.jsp").forward(request, response);
+//            return;
+//          
+//
+//        }
         if (action == null || "list".equals(action)) {
-            List<Bill> bills = billService.getAllBills();
-            request.setAttribute("billList", bills);
-            request.getRequestDispatcher("viewBills.jsp").forward(request, response);
-            return;
-        }
-        
 
+        // Check if filter parameters are present
+        String account = request.getParameter("account");
+        String fromDate = request.getParameter("from");
+        String toDate = request.getParameter("to");
+
+        List<Bill> bills;
+
+        // If any filter is applied, use filtered list
+        if ((account != null && !account.trim().isEmpty()) ||
+            (fromDate != null && !fromDate.trim().isEmpty()) ||
+            (toDate != null && !toDate.trim().isEmpty())) {
+            
+            bills = billService.getFilteredBills(account, fromDate, toDate);
+        } else {
+            // No filters, fetch all
+            bills = billService.getAllBills();
+        }
+
+        request.setAttribute("billList", bills);
+        request.getRequestDispatcher("viewBills.jsp").forward(request, response);
+        return;
+        
+    }
+
+    
         if ("add".equals(action)) {
             try {
                 List<Customer> customers = customerService.getAllCustomers();
@@ -80,7 +107,8 @@ public class BillController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String accountNo = request.getParameter("customer");
+    
+    	String accountNo = request.getParameter("customer");
         String itemsCsv = request.getParameter("items");
         String totalStr = request.getParameter("grandTotal").replace(",", "");
         String staffUser = request.getParameter("user");
@@ -101,6 +129,8 @@ public class BillController extends HttpServlet {
         bill.setStaffUsername(staffUser);
 
         boolean saved = billService.addBill(bill);
+        System.out.println("Bill Saved: " + saved);
+        System.out.println("Generated Bill ID: " + bill.getId());
 
         if (!saved) {
             request.setAttribute("errorMessage", "Failed to save bill.");
@@ -163,7 +193,8 @@ public class BillController extends HttpServlet {
         request.setAttribute("totalAmount", grandTotal);
         request.setAttribute("billDate", new java.util.Date());
         request.setAttribute("bookDetails", bookDetails);
-
+        request.setAttribute("billId", bill.getId());
+        
         request.getRequestDispatcher("BillPreview.jsp").forward(request, response);
     }
 }
