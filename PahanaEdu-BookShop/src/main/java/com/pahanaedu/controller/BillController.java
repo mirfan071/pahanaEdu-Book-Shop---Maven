@@ -28,7 +28,7 @@ public class BillController extends HttpServlet {
         bookService = BookService.getInstance();
     }
 
-    /* --------------- GET --------------- */
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -41,6 +41,7 @@ public class BillController extends HttpServlet {
             request.getRequestDispatcher("viewBills.jsp").forward(request, response);
             return;
         }
+        
 
         if ("add".equals(action)) {
             try {
@@ -49,14 +50,32 @@ public class BillController extends HttpServlet {
                 request.setAttribute("customers", customers);
                 request.setAttribute("books", books);
             } catch (SQLException e) {
-                e.printStackTrace();
+                e.printStackTrace();	
                 request.setAttribute("errorMessage", "Unable to load customers / books");
             }
             request.getRequestDispatcher("addBill.jsp").forward(request, response);
         }
+        
+        if ("delete".equals(action)) {
+            String idStr = request.getParameter("id");
+            if (idStr != null) {
+                try {
+                    int id = Integer.parseInt(idStr);
+                    boolean deleted = billService.deleteBill(id);
+                    if (!deleted) {
+                        request.setAttribute("errorMessage", "Failed to delete bill with ID " + id);
+                    }
+                } catch (NumberFormatException e) {
+                    request.setAttribute("errorMessage", "Invalid Bill ID");
+                }
+            }
+            response.sendRedirect("BillController?action=list");
+            return;
+        }
+        
     }
 
-    /* --------------- POST --------------- */
+  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -85,7 +104,7 @@ public class BillController extends HttpServlet {
 
         if (!saved) {
             request.setAttribute("errorMessage", "Failed to save bill.");
-            // Reload customers and books for the form
+          
             try {
                 request.setAttribute("customers", customerService.getAllCustomers());
                 request.setAttribute("books", bookService.getAllBooks());

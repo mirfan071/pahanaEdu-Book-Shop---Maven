@@ -138,14 +138,14 @@ function updateItemsField() {
         const q   = parseInt(qty.value);
 
         if (opt && opt.value !== "" && q > 0) {
-            selected.push(opt.text + '(' + q + ')');
+            selected.push(opt.text + '(qty-' + q + ')');
         }
     });
 
     document.getElementById('items').value = selected.join(', ');
 }
 
-/* Re‑compute list whenever qty or book changes */
+
 document.querySelectorAll('.book-select').forEach(s =>
     s.addEventListener('change', updateItemsField));
 document.querySelectorAll('.quantity-input').forEach(q =>

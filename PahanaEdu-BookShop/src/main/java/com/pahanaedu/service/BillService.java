@@ -35,7 +35,10 @@ public class BillService {
         return billDAO.getBillById(id);
     }
 
+    public boolean deleteBill(int id) {
+        return billDAO.deleteBill(id);
+    }
+
+
    
-    // public boolean deleteBill(int id) { … }
-    // public boolean updateBill(Bill b) { … }
 }

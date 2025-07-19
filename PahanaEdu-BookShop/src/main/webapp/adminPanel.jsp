@@ -50,8 +50,7 @@
 		    <a href="BookController?action=add" class="dashboard-btn add-book">Add Book</a>
 		    <a href="BookController?action=list" class="dashboard-btn view-book">View All Books</a>
 			<a href="BillController?action=add" class="dashboard-btn add-bill">Add New Bill</a>
-
-		    <a href="viewSales" class="dashboard-btn view-sales">View All Sales</a>
+		    <a href="BillController?action=list" class="dashboard-btn view-sales">View All Sales</a>
 		</div>
 		</div>
 </body>

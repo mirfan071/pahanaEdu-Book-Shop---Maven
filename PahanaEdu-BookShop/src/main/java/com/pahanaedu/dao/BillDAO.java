@@ -29,7 +29,7 @@ public class BillDAO {
 
     public List<Bill> getAllBills() {
         List<Bill> list = new ArrayList<>();
-        String sql = "SELECT * FROM billing ORDER BY billing_time DESC";
+        String sql = "SELECT * FROM billing ORDER BY bill_date DESC";
         try (Connection conn = DBConnectionFactory.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -41,7 +41,7 @@ public class BillDAO {
                 b.setCustomerName(rs.getString("customer_name"));
                 b.setBooksPurchased(rs.getString("books_purchased"));
                 b.setTotalAmount(rs.getDouble("total_amount"));
-                b.setBillingTime(rs.getTimestamp("billing_time"));
+                b.setBillingTime(rs.getTimestamp("bill_date"));
                 b.setStaffUsername(rs.getString("Generated_by"));
                 list.add(b);
             }
@@ -75,4 +75,17 @@ public class BillDAO {
         }
         return null;
     }
+    
+    public boolean deleteBill(int id) {
+        String sql = "DELETE FROM billing WHERE id = ?";
+        try (Connection conn = DBConnectionFactory.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            return ps.executeUpdate() == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
