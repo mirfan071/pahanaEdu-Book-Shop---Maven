@@ -122,18 +122,35 @@ function updateGrandTotal() {
         grandTotal += parseFloat(val) || 0;
     });
     document.getElementById('grandTotal').value = formatNumber(grandTotal);
+    
 }
 
 function updateItemsField() {
-    let selectedBooks = [];
-    document.querySelectorAll('.book-select').forEach(select => {
-        const selectedOption = select.options[select.selectedIndex];
-        if (selectedOption && selectedOption.value !== "") {
-            selectedBooks.push(selectedOption.text);
+    const selected = [];
+
+    document.querySelectorAll('.row').forEach(row => {
+        const sel = row.querySelector('.book-select');
+        const qty = row.querySelector('.quantity-input');
+
+        if (!sel || !qty) return;
+
+        const opt = sel.options[sel.selectedIndex];
+        const q   = parseInt(qty.value);
+
+        if (opt && opt.value !== "" && q > 0) {
+            selected.push(opt.text + '(' + q + ')');
         }
     });
-    document.getElementById('items').value = selectedBooks.join(', ');
+
+    document.getElementById('items').value = selected.join(', ');
 }
+
+/* Re‑compute list whenever qty or book changes */
+document.querySelectorAll('.book-select').forEach(s =>
+    s.addEventListener('change', updateItemsField));
+document.querySelectorAll('.quantity-input').forEach(q =>
+    q.addEventListener('input',  updateItemsField));
+    
 </script>
 
 </body>
