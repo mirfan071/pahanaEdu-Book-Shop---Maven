@@ -23,6 +23,7 @@
 </head>
 <body>
 
+<header class="app-header">
 <nav class="custom-navbar">
   <div class="nav-container">
   
@@ -54,7 +55,7 @@
       <li class="dropdown">
         <span class="dropbtn">Billing Menu</span>
         <div class="dropdown-content">
-          <a href="addBill">Add New Bill</a>
+          <a href="BillController?action=add">Add New Bill</a>
           <a href="viewSales">View Sales</a>
         </div>
       </li>              
@@ -76,3 +77,4 @@
     </ul>
   </div>
 </nav>
+</header>

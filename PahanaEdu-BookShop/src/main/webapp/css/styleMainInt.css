@@ -1,8 +1,14 @@
-@charset "UTF-8";body {
+@charset "UTF-8";
+
+
+
+body {
   background-color: #f0f2f5;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  padding: 0;
+padding-top: 80px;
+
+
 }
 
 .title-box {

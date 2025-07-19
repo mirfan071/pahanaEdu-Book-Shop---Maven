@@ -47,6 +47,10 @@ public class CustomerService {
 		    }
 
 		public void deleteCustomer(int id) throws SQLException {
-			customerDAO.deleteCustomer(id);;
+			customerDAO.deleteCustomer(id);
+			
+		}
+		public Customer getCustomerByAccount(String accountNumber) {
+		    return customerDAO.getCustomerByAccount(accountNumber);
 		}
 }	
