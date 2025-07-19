@@ -45,8 +45,9 @@ public class BillController extends HttpServlet {
 //        }
         if (action == null || "list".equals(action)) {
 
-        // Check if filter parameters are present
+        
         String account = request.getParameter("account");
+        String invoiceNum = request.getParameter("invoicenum");
         String fromDate = request.getParameter("from");
         String toDate = request.getParameter("to");
 
@@ -54,10 +55,11 @@ public class BillController extends HttpServlet {
 
         // If any filter is applied, use filtered list
         if ((account != null && !account.trim().isEmpty()) ||
+        	(invoiceNum != null && !invoiceNum.trim().isEmpty())||
             (fromDate != null && !fromDate.trim().isEmpty()) ||
             (toDate != null && !toDate.trim().isEmpty())) {
             
-            bills = billService.getFilteredBills(account, fromDate, toDate);
+            bills = billService.getFilteredBills(account, invoiceNum, fromDate, toDate);
         } else {
             // No filters, fetch all
             bills = billService.getAllBills();

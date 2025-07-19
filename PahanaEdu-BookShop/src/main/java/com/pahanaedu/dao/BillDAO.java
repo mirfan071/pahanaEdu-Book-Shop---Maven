@@ -110,7 +110,7 @@ public class BillDAO {
     }
 
     
-    public List<Bill> getFilteredBills(String account, String fromDate, String toDate) {
+    public List<Bill> getFilteredBills(String account, String invoiceNum, String fromDate, String toDate) {
         List<Bill> list = new ArrayList<>();
 
         StringBuilder sql = new StringBuilder("SELECT * FROM billing WHERE 1=1");
@@ -119,11 +119,19 @@ public class BillDAO {
         if (account != null && !account.trim().isEmpty()) {
             sql.append(" AND customer_account_number LIKE ?");
             params.add("%" + account.trim() + "%");
+            
+        }
+        
+        if (invoiceNum != null && !invoiceNum.trim().isEmpty()) {
+            sql.append(" AND id LIKE ?");
+            params.add("%" + invoiceNum.trim() + "%");
+        
         }
         if (fromDate != null && !fromDate.trim().isEmpty()) {
             sql.append(" AND bill_date >= ?");
             params.add(Date.valueOf(fromDate));
         }
+        
         if (toDate != null && !toDate.trim().isEmpty()) {
             sql.append(" AND bill_date <= ?");
             params.add(Date.valueOf(toDate));
@@ -156,6 +164,6 @@ public class BillDAO {
         }
 
         return list;
+        }
     }
 
-}

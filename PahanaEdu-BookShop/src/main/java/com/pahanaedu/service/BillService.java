@@ -39,8 +39,8 @@ public class BillService {
         return billDAO.deleteBill(id);
     }
     
-    public List<Bill> getFilteredBills(String account, String fromDate, String toDate) {
-        return billDAO.getFilteredBills(account, fromDate, toDate);
+    public List<Bill> getFilteredBills(String account, String invoiceNum, String fromDate, String toDate) {
+        return billDAO.getFilteredBills(account, invoiceNum, fromDate, toDate);
     }
 
 

@@ -138,18 +138,69 @@ body {
     font-size: 14px;
 }
 
+.btn-filter {
+    background-color: yellow;
+    color: black;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
 .btn-delete:hover {
     background-color: #c82333;
 }
 
-.submit-btn {
-  width: 100%;
-  background-color: #28a745;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
+
+.div-search {
+  background-color: #f9f9f9;
+  border: 2px solid black;   
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
 }
 
+
+.div-search input[type="text"],
+.div-search input[type="date"] {
+  padding: 6px 10px;
+  margin: 5px 10px 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 180px;
+}
+
+
+.div-search input[type="submit"] {
+  background-color: black;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.div-search input[type="submit"]:hover {
+  background-color: #333;
+}
+
+
+.div-search .clear-btn {
+  background-color: #666;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.div-search .clear-btn:hover {
+  background-color: #444;
+}
+	

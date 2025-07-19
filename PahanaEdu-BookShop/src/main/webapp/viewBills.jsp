@@ -14,35 +14,50 @@
 
 <div class="container">
     <h2 class="title">All Bills</h2>
+    	
 
-    <% if ("admin".equalsIgnoreCase(admin)) { %>
-    <div class="form-group">
-        <a href="adminPanel.jsp" class="admin-btn" style="text-decoration:none;">Back to Admin Panel</a>
-    </div>
-    <% } %>
 
-	<form method="get" action="BillController">
-    <input type="hidden" name="action" value="list" />
+	   
+	    <% if ("admin".equalsIgnoreCase(admin)) { %>
+	    <div class="form-group">
+	        <a href="adminPanel.jsp" class="admin-btn" style="text-decoration:none;">Back to Admin Panel</a>
+	    </div>
+	    <% } %>
+	    
+	<div class="div-search">
+	
+		<form method="get" action="BillController">
+		    <input type="hidden" name="action" value="list" />
+		
+		    Customer Account: 
+		    <input type="text" name="account" value="<%= request.getParameter("account") != null ? request.getParameter("account") : "" %>" />
+		    
+		    Invoice Number: 
+		    <input type="text" name="invoicenum" style="max-width:30px;" value="<%= request.getParameter("invoicenum") != null ? request.getParameter("invoicenum") : "" %>" />
+		    
+		<br>
+		    From: 
+		    <input type="date" name="from" value="<%= request.getParameter("from") != null ? request.getParameter("from") : "" %>" />
+		
+		    To: 
+		    <input type="date" name="to" value="<%= request.getParameter("to") != null ? request.getParameter("to") : "" %>" />
+		
+		    <input type="submit" value="Filter"/>
+		    <br><br>
+		    <a href="BillController?action=list" style="text-decoration:none;">
+ 			 <button type="button" class="clear-btn">Clear Filters</button>
+			</a>
+	     
+		</form> 
 
-    Customer Account: 
-    <input type="text" name="account" value="<%= request.getParameter("account") != null ? request.getParameter("account") : "" %>" />
+	</div>
 
-    From: 
-    <input type="date" name="from" value="<%= request.getParameter("from") != null ? request.getParameter("from") : "" %>" />
 
-    To: 
-    <input type="date" name="to" value="<%= request.getParameter("to") != null ? request.getParameter("to") : "" %>" />
-
-    <input type="submit" value="Filter" />
-    
-     <a href="BillController?action=list" style="margin-left: 10px; text-decoration:none;">
-        <button type="button">Clear Filters</button>
-    </a>
-</form>
     <table class="table">
         <thead>
             <tr>
                 <th>#</th>
+                <th>Invoice Number</th>
                 <th>Customer</th>
                 <th>Books Purchased</th>
                 <th>Total Amount (LKR)</th>
@@ -62,6 +77,7 @@
         %>
             <tr>
                 <td><%= count++ %></td>
+                <td style="background-color:Yellow; text-align:center;"><%= sale.getId() %></td>
                 <td><%= sale.getCustomerName() %> (<%= sale.getAccountNumber() %>)</td>
                 <td><%= sale.getBooksPurchased() %></td>
                 <td style="text-align:right"><%= df.format(sale.getTotalAmount()) %></td>
