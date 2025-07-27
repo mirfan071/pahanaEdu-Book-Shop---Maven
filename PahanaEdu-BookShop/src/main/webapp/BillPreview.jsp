@@ -91,7 +91,7 @@
 	    <h3 class="title">Bill Preview</h3>
 	
 	    <div>
-	  	    <p><strong>Invoice Number</strong> <%= (billId != null) ? billId : "N/A" %></p>
+	  	    <p><strong>Invoice Number :</strong> <%= (billId != null) ? billId : "N/A" %></p>
 	        <p><strong>Customer Name:</strong> <%= (name != null) ? name : "Unknown Customer" %></p>
 	        <p><strong>Account Number:</strong> <%= (acc != null) ? acc : "N/A" %></p>
 	        <p><strong>Date:</strong> <%= (date != null) ? new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date) : "N/A" %></p>
@@ -120,9 +120,9 @@
 	        <tr>
 	            <td><%= i++ %></td>
 	            <td><%= item.get("title") %></td>
-	            <td><%= item.get("qty") %></td>
-	            <td><%= df.format(item.get("unitPrice")) %></td>
-	            <td><%= df.format(item.get("total")) %></td>
+	            <td style="text-align:center"><%= item.get("qty") %></td>
+	            <td style="text-align:right"><%= df.format(item.get("unitPrice")) %></td>
+	            <td style="text-align:right"><%= df.format(item.get("total")) %></td>
 	        </tr>
 	        <%
 	                }

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.pahanaedu.dao.CustomerDAO;
-import com.pahanaedu.model.Book;
 import com.pahanaedu.model.Customer;
 
 import com.pahanaedu.service.CustomerService;
@@ -58,7 +57,7 @@ public void init() {
 
                 request.setAttribute("customerList", customers);
                 request.getRequestDispatcher("viewCustomers.jsp").forward(request, response);
-                return;                        // ← VERY IMPORTANT
+                return;                        
             }
 
             if ("add".equals(action)) {
@@ -137,13 +136,13 @@ public void init() {
 	}
 	
 	
-	private void listCustomers(HttpServletRequest request, HttpServletResponse response)
-	        throws SQLException, ServletException, IOException {
-		
-	    List<Customer> customer = customerService.getAllCustomers();
-	    request.setAttribute("customerList", customer);
-	    request.getRequestDispatcher("viewCustomers.jsp").forward(request, response);
-	}
+//	private void listCustomers(HttpServletRequest request, HttpServletResponse response)
+//	        throws SQLException, ServletException, IOException {
+//		
+//	    List<Customer> customer = customerService.getAllCustomers();
+//	    request.setAttribute("customerList", customer);
+//	    request.getRequestDispatcher("viewCustomers.jsp").forward(request, response);
+//	}
 	
     private void showAddForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

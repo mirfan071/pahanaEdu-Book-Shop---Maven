@@ -1,7 +1,7 @@
 package com.pahanaedu.dao;
 
 
-import com.pahanaedu.model.Book;
+
 import com.pahanaedu.model.Customer;
 import java.sql.*;
 import java.util.*;

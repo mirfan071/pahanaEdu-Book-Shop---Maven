@@ -131,8 +131,8 @@ public class BillController extends HttpServlet {
         bill.setStaffUsername(staffUser);
 
         boolean saved = billService.addBill(bill);
-        System.out.println("Bill Saved: " + saved);
-        System.out.println("Generated Bill ID: " + bill.getId());
+//        System.out.println("Bill Saved: " + saved);
+//        System.out.println("Generated Bill ID: " + bill.getId());
 
         if (!saved) {
             request.setAttribute("errorMessage", "Failed to save bill.");

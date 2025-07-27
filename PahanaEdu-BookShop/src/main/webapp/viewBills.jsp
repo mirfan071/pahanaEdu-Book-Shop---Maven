@@ -71,9 +71,11 @@
             List<Bill> salesList = (List<Bill>) request.getAttribute("billList");
             DecimalFormat df = new DecimalFormat("#,##0.00");
             int count = 1;
+            double totalSales = 0.0;
 
             if (salesList != null && !salesList.isEmpty()) {
                 for (Bill sale : salesList) {
+                	totalSales += sale.getTotalAmount();
         %>
             <tr>
                 <td><%= count++ %></td>
@@ -108,7 +110,8 @@
 
     <% if (salesList != null) { %>
     <div class="form-group right-align" style="margin-top: 20px;">
-        <strong>Total Invoices: <%= salesList.size() %></strong>
+        <strong>Total Invoices: <%= salesList.size() %></strong> <br>
+   		<strong>Total Sales (LKR): <%= df.format(totalSales) %></strong>
     </div>
     <% } %>
 </div>

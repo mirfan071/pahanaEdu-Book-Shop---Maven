@@ -175,7 +175,7 @@ public class UserController extends HttpServlet {
         userService.updateUser(updatedUser);
 
         HttpSession session = request.getSession();
-        session.setAttribute("message", "User updated successfully!");
+ //       session.setAttribute("message1", "User updated successfully!");
         response.sendRedirect("user?action=list&updated=true");
 
         

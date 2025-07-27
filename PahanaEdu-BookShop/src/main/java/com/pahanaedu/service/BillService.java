@@ -21,7 +21,6 @@ public class BillService {
         return instance;
     }
 
-    /* ---------- CRUD wrappers ---------- */
 
     public boolean addBill(Bill bill) {
         return billDAO.addBill(bill);
