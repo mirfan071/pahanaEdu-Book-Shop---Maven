@@ -1,4 +1,4 @@
-package com.pahanaedu.dao;
+	package com.pahanaedu.dao;
 import com.pahanaedu.model.Book;
 import java.sql.*;
 import java.util.*;
@@ -96,7 +96,7 @@ public class BookDAO {
 	
 	public List<Book> searchBooks(String keyword) {
 	    List<Book> books = new ArrayList<>();
-	    String sql = "SELECT * FROM books WHERE LOWER(title) LIKE ? OR LOWER(author) LIKE ? OR LOWER(category) LIKE ? OR LOWER(language) LIKE ?";
+	    String sql = "SELECT * FROM books WHERE LOWER(title) LIKE ? OR LOWER(author) LIKE ? OR LOWER(category) LIKE ? OR LOWER(language) LIKE ?  OR LOWER(price) LIKE ?";
 
 	    try (Connection conn = DBConnectionFactory.getConnection();
 	         PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -106,6 +106,7 @@ public class BookDAO {
 	        ps.setString(2, like);
 	        ps.setString(3, like);
 	        ps.setString(4, like);
+	        ps.setString(5, like);
 
 	        ResultSet rs = ps.executeQuery();
 	        while (rs.next()) {

@@ -24,7 +24,9 @@
 		    <a href="Controller?action=add" class="dashboard-btn add-book">Add Book</a>
 		    <a href="BookController?action=list" class="dashboard-btn view-book">View All Books</a>
 		    <a href="BillController?action=add" class="dashboard-btn add-bill">Add New Bill</a>
+		     <% if (!"Cashier".equalsIgnoreCase(role)) { %>
 		    <a href="BillController?action=list" class="dashboard-btn view-sales">View All Sales</a>
+		    <%} %>
 		</div>
 
 </div>

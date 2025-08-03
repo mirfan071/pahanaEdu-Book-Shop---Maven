@@ -170,7 +170,7 @@ public class BillController extends HttpServlet {
                 }
 
                 if (book == null) {
-                    System.out.println("Book not found for ID: " + bookId);
+                //    System.out.println("Book not found for ID: " + bookId);
                     continue;
                 }
 

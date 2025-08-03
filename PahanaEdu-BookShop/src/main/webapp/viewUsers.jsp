@@ -2,6 +2,19 @@
 <%@ page import="com.pahanaedu.model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
+
+<%
+   
+    String admin = (String) session.getAttribute("admin");
+
+    if (admin == null || !"admin".equalsIgnoreCase(admin)) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
+
+%>
+
+
 <%
     String deleted = request.getParameter("deleted");
     if ("true".equals(deleted)) {

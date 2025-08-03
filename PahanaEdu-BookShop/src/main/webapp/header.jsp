@@ -56,7 +56,10 @@
         <span class="dropbtn">Billing Menu</span>
         <div class="dropdown-content">
           <a href="BillController?action=add">Add New Bill</a>
+           <% if (!"Cashier".equalsIgnoreCase(role)) { %>
           <a href="BillController?action=list">View Sales</a>
+          
+          <%} %>
         </div>
       </li>              
      

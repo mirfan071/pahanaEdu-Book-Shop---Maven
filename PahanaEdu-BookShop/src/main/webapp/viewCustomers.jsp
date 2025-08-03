@@ -39,7 +39,7 @@
 
     <form method="get" action="CustomerController?action=update" class="search-form">
         <div class="form-group">
-            <input type="text" name="query" placeholder="Search by ">
+            <input type="text" name="query" placeholder="Search by account number, name, address, telephone or email">
         </div>
         
         <div class="form-group">
