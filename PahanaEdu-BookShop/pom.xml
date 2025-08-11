@@ -58,12 +58,15 @@
     <version>8.0.32</version>
   </dependency>
 
+ 
   
   <dependency>
-  	<groupId>com.project.pahanaEdu-Maven1</groupId>
-  	<artifactId>pahanaedu-maven-1</artifactId>
-  	<version>0.0.1-SNAPSHOT</version>
-  </dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>3.1.0</version> <!-- You can use 3.1.0 if targeting older servlet version -->
+    <scope>provided</scope>
+</dependency>
+
   </dependencies>
     
 

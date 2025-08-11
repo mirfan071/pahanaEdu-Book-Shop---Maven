@@ -44,6 +44,22 @@ body {
     border-radius: 5px;
 }
 
+.button {
+  background-color: #ffc107; 
+  color: #212529;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-size: 15px;
+  width: 100%;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.blue-button:hover {
+  background-color: #0137ec;
+}
+
 .readonly {
     background-color: #f0f0f0;
 }

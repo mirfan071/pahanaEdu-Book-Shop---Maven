@@ -1,6 +1,5 @@
 package com.pahanaedu.daoTest;
 
-
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -14,8 +13,8 @@ import org.junit.Test;
 import com.pahanaedu.dao.DBConnection;
 
 public class DBConnectionTest {
-	
-	@Test
+
+    @Test
     public void testGetInstanceNotNull() {
         // Ensure that the singleton instance is created and not null.
         DBConnection instance = DBConnection.getInstance();
@@ -52,13 +51,8 @@ public class DBConnectionTest {
         DBConnection instance = DBConnection.getInstance();
         Connection connection = instance.getConnection();
         try (Statement stmt = connection.createStatement()) {
-            // Execute a simple SELECT query.
             boolean result = stmt.execute("SELECT 1");
-            // The main purpose is to ensure that no exception is thrown.
-            // Depending on the JDBC driver, the returned boolean might vary.
             assertNotNull("The query execution should complete without returning a null result", result);
         }
     }
-	
-
 }

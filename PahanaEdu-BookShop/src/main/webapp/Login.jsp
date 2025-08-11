@@ -38,7 +38,11 @@
         <button type="submit" class="wide-button">Log In</button>
       </form>
       
-       
+          <% if (request.getAttribute("error") != null) { %>
+      <div class="error">
+        <%= request.getAttribute("error") %>
+      </div>
+   		 <% } %>
     </div>
   </div>
 </body>

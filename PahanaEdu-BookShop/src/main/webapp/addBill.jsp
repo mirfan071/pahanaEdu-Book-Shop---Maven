@@ -78,7 +78,7 @@
         </div>
 
         <div class="form-group center-align">
-            <button type="submit" class="submit-btn">Generate Bill</button>
+            <button type="submit" class="button">Generate Bill</button>
         </div>
     </form>
 </div>
